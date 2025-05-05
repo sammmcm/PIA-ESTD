@@ -11,7 +11,7 @@ void modificarAlumno(alumno encontrado) {
     cout << "Nombre: " << encontrado->nombre << endl;
     cout << "Edad: " << encontrado->edad << endl;
     cout << "Promedio: " << encontrado->promedio << endl;
-    cout << "Dirección: " << encontrado->address.calle << ", "
+    cout << "Direccion: " << encontrado->address.calle << ", "
          << encontrado->address.colonia << ", "
          << encontrado->address.municipio << ", #"
          << encontrado->address.numero << ", CP "
@@ -19,7 +19,7 @@ void modificarAlumno(alumno encontrado) {
 
     int opcionMod;
     do {
-        cout << "\n¿Qué desea modificar?" << endl;
+        cout << "\nASPECTO A MODIFICAR: " << endl;
         cout << "1. Nombre" << endl;
         cout << "2. Edad" << endl;
         cout << "3. Promedio" << endl;
@@ -31,64 +31,71 @@ void modificarAlumno(alumno encontrado) {
         cout << "9. Salir" << endl;
 
         do {
-            cout << "Opción: ";
-        } while (!validarInt(opcionMod) && cout << "Error: debe ingresar un número válido.\n");
+            cout << "Opcion: ";
+        } while (!validarInt(opcionMod) && cout << "Error: debe ingresar un numero válido.\n");
 
         switch (opcionMod) {
             case 1: {
-                cout << "Nuevo nombre: ";
-                cin.ignore();
-                getline(cin, encontrado->nombre);
+                do {
+                    cout << "Nuevo nombre: "; getline(cin, encontrado->nombre);
+                } while (!validarString(encontrado->nombre) && cout << "Error: El nombre debe ser solo letras." << endl);
+                cout << "El nombre ha sido cambiado a "<< encontrado->nombre << endl;
                 break;
             }
             case 2: {
                 do {
                     cout << "Nueva edad: ";
-                } while (!validarInt(encontrado->edad) && cout << "Error: edad inválida.\n");
+                } while (!validarInt(encontrado->edad) && cout << "Error: edad invalida.\n");
+                cout << "La edad a sido cambiada a "<< encontrado->edad << endl;
                 break;
             }
             case 3: {
                 do {
                     cout << "Nuevo promedio: ";
-                } while (!validarDouble(encontrado->promedio) && cout << "Error: promedio inválido.\n");
+                } while (!validarDouble(encontrado->promedio) && cout << "Error: promedio invalido.\n");
+                cout << "El promedio ha sido cambiado a "<< encontrado->promedio << endl;
                 break;
             }
             case 4: {
-                cout << "Nueva calle: ";
-                cin.ignore();
-                getline(cin, encontrado->address.calle);
+                do {
+                    cout << "Nueva calle: "; getline(cin, encontrado->address.calle);
+                } while (!validarString(encontrado->address.calle) && cout << "Error: La calle debe ser solo letras." << endl);
+                cout << "La calle ha sido cambiada a "<< encontrado->address.calle << endl;
                 break;
             }
             case 5: {
-                cout << "Nueva colonia: ";
-                cin.ignore();
-                getline(cin, encontrado->address.colonia);
+                do {
+                    cout << "Nueva colonia: "; getline(cin, encontrado->address.colonia);
+                } while (!validarString(encontrado->address.colonia) && cout << "Error: La colonia debe ser solo letras." << endl);
+                cout << "La colonia ha sida cambiado a "<< encontrado->address.colonia << endl;
                 break;
             }
             case 6: {
-                cout << "Nuevo municipio: ";
-                cin.ignore();
-                getline(cin, encontrado->address.municipio);
+                do {
+                cout << "Nuevo municipio: "; getline(cin, encontrado->address.municipio);
+                } while (!validarString(encontrado->address.municipio) && cout << "Error: El municipio debe ser solo letras." << endl);
+                cout << "El municipio ha sido cambiado a "<< encontrado->address.municipio << endl;
                 break;
             }
             case 7: {
                 do {
-                    cout << "Nuevo número de domicilio: ";
-                } while (!validarInt(encontrado->address.numero) && cout << "Error: número inválido.\n");
+                    cout << "Nuevo numero de domicilio: ";
+                } while (!validarInt(encontrado->address.numero) && cout << "Error: numero invalido.\n");
+                cout << "El numero de domiciliio ha sido cambiado a "<< encontrado->address.numero << endl;
                 break;
             }
             case 8: {
                 do {
-                    cout << "Nuevo código postal: ";
-                } while (!validarInt(encontrado->address.cp) && cout << "Error: CP inválido.\n");
+                    cout << "Nuevo codigo postal: ";
+                } while (!validarInt(encontrado->address.cp) && cout << "Error: CP invalido.\n");
+                cout << "El codigo postal ha sido cambiado a "<< encontrado->address.cp << endl;
                 break;
             }
             case 9:
-                cout << "Saliendo del menú de modificación." << endl;
+                cout << "Saliendo del menu de modificacion." << endl;
                 break;
             default:
-                cout << "Opción inválida." << endl;
+                cout << "Opcion invalida." << endl;
         }
     } while (opcionMod != 9);
 }
-
