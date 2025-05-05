@@ -110,40 +110,55 @@ int main() {
                 } while (opsubmenu != 5);
                 break;
             case 5: {
-                int opcionBusqueda;
-                alumno encontrado = nullptr;
+            int opcionBusqueda = 0;
+            alumno encontrado = nullptr;
+            do {
+            cout << "\nMODIFICACION DE DATOS DE ALUMNO\n"
+                 << "1. Buscar por matricula\n"
+                 << "2. Buscar por nombre\n"
+                 << "3. Regresar al menu principal\n";
 
-                cout << "\nMODIFICACION DE DATOS DE ALUMNO" << endl;
-                cout << "1. Buscar por matricula" << endl;
-                cout << "2. Buscar por nombre" << endl;
+            do {
+                cout << "Seleccione una opcion: ";
+            } while (!validarInt(opcionBusqueda) &&
+                    cout << "Error: opción invalida. Debe ser un numero.\n");
 
-                do {
-                    cout << "Seleccione una opcion: ";
-                } while (!validarInt(opcionBusqueda) && cout << "Error: opcion invalida.\n");
-
-                if (opcionBusqueda == 1) {
-                    long mat;
+                switch (opcionBusqueda) {
+                    case 1: {
+                    long mat = 0;
                     do {
                         cout << "Ingrese matricula: ";
-                    } while (!validarLong(mat) && cout << "Error: matricula invalida.\n");
+                    } while (!validarLong(mat) &&
+                         cout << "Error: matricula inválida.\n");
                     encontrado = busquedaPorMatricula(listaAltas, mat);
-                } else if (opcionBusqueda == 2) {
+                        break;
+                    }
+                    case 2: {
                     string nombre;
                     do {
                         cout << "Ingrese nombre: "; getline(cin, nombre);
-                    } while (!validarString(nombre) && cout << "Error: El nombre debe ser solo letras." << endl);
+                    } while (!validarString(nombre) && cout << "Error: el nombre debe ser solo letras.\n");
                     encontrado = busquedaPorNombre(listaAltas, nombre);
-                }
-
+                        break;
+                    }
+                    case 3:
+                        cout << "Regresando al menu principal...\n";
+                        break;
+                    default:
+                        cout << "Error: opcion no valida.\n";
+                        break;
+            }
+            if (opcionBusqueda == 1 || opcionBusqueda == 2) {
                 if (!encontrado) {
                     cout << "Alumno no encontrado." << endl;
                 } else {
                     modificarAlumno(encontrado);
                 }
-
+            }
                 system("pause");
                 system("cls");
-                break;
+            } while (opcionBusqueda != 3);
+            break;
             }
             case 6:
                 break;
