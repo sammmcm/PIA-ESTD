@@ -110,25 +110,25 @@ int main() {
                 int opcionBusqueda;
                 alumno encontrado = nullptr;
 
-                cout << "\nMODIFICACIÓN DE DATOS DE ALUMNO" << endl;
-                cout << "1. Buscar por matrícula" << endl;
+                cout << "\nMODIFICACION DE DATOS DE ALUMNO" << endl;
+                cout << "1. Buscar por matricula" << endl;
                 cout << "2. Buscar por nombre" << endl;
 
                 do {
-                    cout << "Seleccione una opción: ";
-                } while (!validarInt(opcionBusqueda) && cout << "Error: opción inválida.\n");
+                    cout << "Seleccione una opcion: ";
+                } while (!validarInt(opcionBusqueda) && cout << "Error: opcion invalida.\n");
 
                 if (opcionBusqueda == 1) {
                     long mat;
                     do {
-                        cout << "Ingrese matrícula: ";
-                    } while (!validarLong(mat) && cout << "Error: matrícula inválida.\n");
+                        cout << "Ingrese matricula: ";
+                    } while (!validarLong(mat) && cout << "Error: matricula invalida.\n");
                     encontrado = busquedaPorMatricula(listaAltas, mat);
                 } else if (opcionBusqueda == 2) {
                     string nombre;
-                    cout << "Ingrese nombre: ";
-                    cin.ignore();
-                    getline(cin, nombre);
+                    do {
+                        cout << "Ingrese nombre: "; getline(cin, nombre);
+                    } while (!validarString(nombre) && cout << "Error: El nombre debe ser solo letras." << endl);
                     encontrado = busquedaPorNombre(listaAltas, nombre);
                 }
 
