@@ -4,6 +4,7 @@
 #include "baja.h"
 #include "listas.h"
 #include "pilas.h"
+#include "modificacion.h"
 
 using namespace std;
 
@@ -105,8 +106,42 @@ int main() {
                     system("pause"); system("cls");
                 } while (opsubmenu != 5);
                 break;
-            case 5:
+            case 5: {
+                int opcionBusqueda;
+                alumno encontrado = nullptr;
+
+                cout << "\nMODIFICACIÓN DE DATOS DE ALUMNO" << endl;
+                cout << "1. Buscar por matrícula" << endl;
+                cout << "2. Buscar por nombre" << endl;
+
+                do {
+                    cout << "Seleccione una opción: ";
+                } while (!validarInt(opcionBusqueda) && cout << "Error: opción inválida.\n");
+
+                if (opcionBusqueda == 1) {
+                    long mat;
+                    do {
+                        cout << "Ingrese matrícula: ";
+                    } while (!validarLong(mat) && cout << "Error: matrícula inválida.\n");
+                    encontrado = busquedaPorMatricula(listaAltas, mat);
+                } else if (opcionBusqueda == 2) {
+                    string nombre;
+                    cout << "Ingrese nombre: ";
+                    cin.ignore();
+                    getline(cin, nombre);
+                    encontrado = busquedaPorNombre(listaAltas, nombre);
+                }
+
+                if (!encontrado) {
+                    cout << "Alumno no encontrado." << endl;
+                } else {
+                    modificarAlumno(encontrado);
+                }
+
+                system("pause");
+                system("cls");
                 break;
+            }
             case 6:
                 break;
             case 7:
