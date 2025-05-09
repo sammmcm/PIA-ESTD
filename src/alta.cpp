@@ -38,6 +38,6 @@ alumno altaAlum(alumno &lista) {
     do {
         cout << "CP: ";
     } while (!validarInt(nuevo->address.cp) && cout << "Error: El CP debe contener solo numeros." << endl << endl);
-
+    nuevo->inscripcion = esperando;
     return nuevo;
 }
