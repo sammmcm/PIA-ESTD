@@ -7,6 +7,7 @@
 #include "include/recuperar.h"
 #include "include/reportes.h"
 #include "include/validaciones.h"
+#include "include/inscripcion.h"
 using namespace std;
 
 int main() {
@@ -14,6 +15,7 @@ int main() {
     alumno listaAltas = nullptr;
     alumno listaBajas = nullptr;
     alumno pilaBajas = nullptr;
+    ColaInscripciones colaInscripciones;
 
     do {
         cout << "\tMENU" << endl
@@ -110,58 +112,106 @@ int main() {
                 } while (opsubmenu != 5);
                 break;
             case 5: {
-            int opcionBusqueda = 0;
-            alumno encontrado = nullptr;
-            do {
-            cout << "\nMODIFICACION DE DATOS DE ALUMNO\n"
-                 << "1. Buscar por matricula\n"
-                 << "2. Buscar por nombre\n"
-                 << "3. Regresar al menu principal\n";
+                int opcionBusqueda = 0;
+                alumno encontrado = nullptr;
+                do {
+                    cout << "\nMODIFICACION DE DATOS DE ALUMNO\n"
+                         << "1. Buscar por matricula\n"
+                         << "2. Buscar por nombre\n"
+                         << "3. Regresar al menu principal\n";
 
-            do {
-                cout << "Seleccione una opcion: ";
-            } while (!validarInt(opcionBusqueda) &&
-                    cout << "Error: opción invalida. Debe ser un numero.\n");
+                    do {
+                        cout << "Seleccione una opcion: ";
+                    } while (!validarInt(opcionBusqueda) &&
+                            cout << "Error: opción invalida. Debe ser un numero.\n");
 
-                switch (opcionBusqueda) {
-                    case 1: {
-                    long mat = 0;
-                    do {
-                        cout << "Ingrese matricula: ";
-                    } while (!validarLong(mat) &&
-                         cout << "Error: matricula inválida.\n");
-                    encontrado = busquedaPorMatricula(listaAltas, mat);
-                        break;
+                    switch (opcionBusqueda) {
+                        case 1: {
+                            long mat = 0;
+                            do {
+                                cout << "Ingrese matricula: ";
+                            } while (!validarLong(mat) &&
+                                 cout << "Error: matricula inválida.\n");
+                            encontrado = busquedaPorMatricula(listaAltas, mat);
+                            break;
+                        }
+                        case 2: {
+                            string nombre;
+                            do {
+                                cout << "Ingrese nombre: "; getline(cin, nombre);
+                            } while (!validarString(nombre) && cout << "Error: el nombre debe ser solo letras.\n");
+                            encontrado = busquedaPorNombre(listaAltas, nombre);
+                            break;
+                        }
+                        case 3:
+                            cout << "Regresando al menu principal...\n";
+                            break;
+                        default:
+                            cout << "Error: opcion no valida.\n";
+                            break;
                     }
-                    case 2: {
-                    string nombre;
-                    do {
-                        cout << "Ingrese nombre: "; getline(cin, nombre);
-                    } while (!validarString(nombre) && cout << "Error: el nombre debe ser solo letras.\n");
-                    encontrado = busquedaPorNombre(listaAltas, nombre);
-                        break;
+                    if (opcionBusqueda == 1 || opcionBusqueda == 2) {
+                        if (!encontrado) {
+                            cout << "Alumno no encontrado." << endl;
+                        } else {
+                            modificarAlumno(encontrado);
+                        }
                     }
-                    case 3:
-                        cout << "Regresando al menu principal...\n";
-                        break;
-                    default:
-                        cout << "Error: opcion no valida.\n";
-                        break;
-            }
-            if (opcionBusqueda == 1 || opcionBusqueda == 2) {
-                if (!encontrado) {
-                    cout << "Alumno no encontrado." << endl;
-                } else {
-                    modificarAlumno(encontrado);
-                }
-            }
-                system("pause");
-                system("cls");
-            } while (opcionBusqueda != 3);
-            break;
-            }
-            case 6:
+                    system("pause");
+                    system("cls");
+                } while (opcionBusqueda != 3);
                 break;
+            }
+            case 6: {
+                int opcionInscripcion;
+                do {
+                    cout << "\n\tCONTROL DE INSCRIPCIONES" << endl
+                         << "1. Ver alumnos esperando inscripción" << endl
+                         << "2. Procesar siguiente inscripción" << endl
+                         << "3. Ver alumnos inscritos" << endl
+                         << "4. Volver al menú principal" << endl;
+
+                    do {
+                        cout << "Elija una opcion: ";
+                    } while (!validarInt(opcionInscripcion) && cout << "Error: La opcion debe ser un numero." << endl);
+
+                    switch(opcionInscripcion) {
+                        case 1: {
+                            // Limpiamos la cola actual y la reconstruimos
+                            while(!colaInscripciones.empty()) {
+                                colaInscripciones.pop();
+                            }
+                            agregarAColaDeInscripciones(listaAltas, colaInscripciones);
+                            if(!colaInscripciones.empty()) {
+                                mostrarCola(colaInscripciones);
+                            } else {
+                                cout << "No hay alumnos esperando inscripción." << endl;
+                            }
+                            break;
+                        }
+                        case 2:
+                            if(!colaInscripciones.empty()) {
+                                inscribirAlumno(colaInscripciones, listaAltas);  // Pass listaAltas
+                            } else {
+                                cout << "No hay alumnos en la cola para inscribirse." << endl;
+                            }
+                            break;
+                        case 3:
+                            mostrarListaInscritos(listaAltas);
+                            break;
+                        case 4:
+                            cout << "Volviendo al menú principal..." << endl;
+                            break;
+                        default:
+                            cout << "Opción no válida." << endl;
+                    }
+
+                    cout << endl;
+                    system("pause");
+                    system("cls");
+                } while (opcionInscripcion != 4);
+                break;
+            }
             case 7:
                 break;
             case 8:
