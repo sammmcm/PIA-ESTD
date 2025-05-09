@@ -56,6 +56,7 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
             alumBaja->edad = encontrado->edad;
             alumBaja->promedio = encontrado->promedio;
             alumBaja->situacion = baja;
+            alumBaja->inscripcion = inactivo;
             alumBaja->address.calle = encontrado->address.calle;
             alumBaja->address.colonia = encontrado->address.colonia;
             alumBaja->address.municipio = encontrado->address.municipio;
@@ -85,6 +86,7 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
             alumBaja->edad = encontrado->edad;
             alumBaja->promedio = encontrado->promedio;
             alumBaja->situacion = baja;
+            alumBaja->inscripcion = inactivo;
             alumBaja->address.calle = encontrado->address.calle;
             alumBaja->address.colonia = encontrado->address.colonia;
             alumBaja->address.municipio = encontrado->address.municipio;
@@ -116,6 +118,7 @@ void deshacerBajaParcial(alumno &pila, alumno &listaAltas, alumno &listaBajas) {
     alumno aux = pila;
     pila = pila->sig;
     aux->situacion = alta;
+    aux->inscripcion = esperando;
     insertarEnLista(listaAltas, aux);
     cout << endl << "Se recupero el alumno con la matricula " << matricula << "." << endl << endl;
 }
