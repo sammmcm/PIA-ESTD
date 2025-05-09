@@ -17,4 +17,6 @@ add_executable(PIA-ESTD
         src/recuperar.cpp
         src/reportes.cpp
         include/reportes.h
+        src/inscripcion.cpp
+        include/inscripcion.h
 )
