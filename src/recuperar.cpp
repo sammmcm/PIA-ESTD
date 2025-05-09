@@ -1,8 +1,8 @@
 #include <iostream>
-#include "recuperar.h"
 #include "baja.h"
 #include "listas.h"
 #include "pilas.h"
+#include "recuperar.h"
 #include "validaciones.h"
 
 using namespace std;
@@ -10,21 +10,19 @@ using namespace std;
 /*
  * mueve un alumno desde la lista de bajas parciales a la lista de activos.
  * se desvincula el nodo sin eliminarlo para reutilizarlo
- */
-void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas)
-{
+*/
+void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas) {
     if (listaVacia(listaBajas)) return;
 
     int opcBusq;
-    cout << endl
-         << "buscar por:" << endl
-         << "1. matricula" << endl
-         << "2. nombre" << endl;
+    cout << endl << "Buscar por:" << endl
+         << "1. Matricula." << endl
+         << "2. Nombre." << endl
+         << "3. Salir." << endl;
 
     do {
-        cout << "elige una opcion: ";
-    } while (!validarInt(opcBusq) &&
-             cout << "error: la opcion debe ser un numero." << endl << endl);
+        cout << "Elija una opcion: ";
+    } while (!validarInt(opcBusq) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
     alumno hallado = nullptr;
 
@@ -32,9 +30,8 @@ void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas)
         case 1: {
             long mat;
             do {
-                cout << endl << "ingresa la matricula: ";
-            } while (!validarLong(mat) &&
-                     cout << "error: la matricula debe ser numerica." << endl);
+                cout << endl << "Ingrese la matricula del alumno a recuperar: ";
+            } while (!validarLong(mat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl);
             int tam = obtenerTamaño(listaBajas);
             hallado = busquedaBinaria(listaBajas, 0, tam - 1, mat);
             break;
@@ -42,20 +39,21 @@ void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas)
         case 2: {
             string nom;
             do {
-                cout << endl << "ingresa el nombre: ";
-                getline(cin, nom);
-            } while (!validarString(nom) &&
-                     cout << "error: el nombre debe ser solo letras." << endl);
+                cout << endl << "Ingrese el nombre del alumno a recuperar: "; getline(cin, nom);
+            } while (!validarString(nom) && cout << "Error: El nombre debe estar conformado solo por letras." << endl);
             hallado = busquedaPorNombre(listaBajas, nom);
             break;
         }
+        case 3: 
+            cout << "Saliendo del submenu..." << endl;
+            break;
         default:
-            cout << "error: opcion incorrecta." << endl;
+            cout << "Error: Opcion incorrecta." << endl;
             return;
     }
 
     if (!hallado) {
-        cout << endl << "alumno no encontrado." << endl << endl;
+        cout << endl << "Alumno no encontrado." << endl << endl;
         return;
     }
 
@@ -83,5 +81,5 @@ void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas)
     insertarEnLista(listaAltas, hallado);
     mergeSort(listaAltas);
 
-    cout << endl << "alumno recuperado con exito." << endl << endl;
+    cout << endl << "Alumno recuperado con exito." << endl << endl;
 }
