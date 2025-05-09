@@ -13,10 +13,7 @@ add_executable(PIA-ESTD
         src/modificacion.cpp
         src/pilas.cpp
         src/validaciones.cpp
-        include/recuperar.h
         src/recuperar.cpp
         src/reportes.cpp
-        include/reportes.h
         src/inscripcion.cpp
-        include/inscripcion.h
 )
