@@ -8,6 +8,12 @@ typedef enum {
     alta
 } status;
 
+typedef enum {
+    esperando,
+    inactivo,
+    inscrito
+} insc;
+
 typedef struct {
     string calle;
     string colonia;
@@ -23,6 +29,7 @@ typedef struct nodo {
     double promedio;
     status situacion;
     direccion address;
+    insc inscripcion;
     nodo *sig;
 } *alumno;
 
