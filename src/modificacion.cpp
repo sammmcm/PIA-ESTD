@@ -3,8 +3,18 @@
 #include "modificacion.h"
 #include "validaciones.h"
 #include "alta.h"
+#include "inscripcion.h"
 
 using namespace std;
+ostream& operator<<(ostream& os, const insc& estado) {
+    switch(estado) {
+        case esperando: os << "esperando"; break;
+        case inactivo: os << "inactivo"; break;
+        case inscrito: os << "inscrito"; break;
+        default: os << "desconocido"; break;
+    }
+    return os;
+}
 
 void modificarAlumno(alumno encontrado) {
     cout << "\nAlumno encontrado:" << endl;
@@ -16,6 +26,7 @@ void modificarAlumno(alumno encontrado) {
          << encontrado->address.municipio << ", #"
          << encontrado->address.numero << ", CP "
          << encontrado->address.cp << endl;
+    cout << "Estatus de inscripcion: " << encontrado->inscripcion << endl;
 
     int opcionMod;
     do {
