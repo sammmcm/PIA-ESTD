@@ -23,6 +23,7 @@ void insertarEnPila(alumno &pila, alumno elem) {
     elemPila->address.numero = elem->address.numero;
     elemPila->address.cp = elem->address.cp;
     elemPila->sig = pila;
+    elemPila->inscripcion = inactivo;
     pila = elemPila;
 }
 
