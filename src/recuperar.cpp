@@ -1,6 +1,10 @@
 #include <iostream>
-#include "../include/recuperar.h"
-#include "../include/baja.h"
+#include "recuperar.h"
+#include "baja.h"
+#include "listas.h"
+#include "pilas.h"
+#include "validaciones.h"
+
 using namespace std;
 
 /*
@@ -75,6 +79,7 @@ void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas)
 
     // reinsertamos el nodo en la lista de activos
     hallado->situacion = alta;
+    hallado->inscripcion = esperando;
     insertarEnLista(listaAltas, hallado);
     mergeSort(listaAltas);
 
