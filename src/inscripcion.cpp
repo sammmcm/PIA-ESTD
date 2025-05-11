@@ -19,7 +19,7 @@ struct Alumno {
     // Comparador para la cola de prioridad (primero por promedio, luego por nombre)
     bool operator<(const Alumno& otro) const {
         if (promedio == otro.promedio)
-            return nombre > otro.nombre;  // Si promedios son iguales, se ordena por nombre alfabéticamente
+            return nombre > otro.nombre;  // Si promedios son iguales, se ordena por nombre alfab�ticamente
         return promedio < otro.promedio;  // Ordena de mayor a menor promedio
     }
 };
@@ -27,7 +27,7 @@ struct Alumno {
 // Tipo de cola de prioridad para inscripciones
 using ColaInscripciones = priority_queue<Alumno>;
 
-// Función para agregar los alumnos esperando a la cola de inscripciones
+// Funci�n para agregar los alumnos esperando a la cola de inscripciones
 void agregarAColaDeInscripciones(alumno &listaAltas, ColaInscripciones &cola) {
     alumno actual = listaAltas;
 
@@ -40,7 +40,7 @@ void agregarAColaDeInscripciones(alumno &listaAltas, ColaInscripciones &cola) {
     }
 }
 
-// Función para desencolar un alumno (inscripción)
+// Funci�n para desencolar un alumno (inscripci�n)
 void inscribirAlumno(ColaInscripciones &cola, alumno &listaAltas) {  // Add listaAltas parameter
     if (!cola.empty()) {
         Alumno alumnoInscrito = cola.top();
@@ -63,7 +63,7 @@ void inscribirAlumno(ColaInscripciones &cola, alumno &listaAltas) {  // Add list
     }
 }
 
-// Función para imprimir los alumnos en la cola (para verificar el orden)
+// Funci�n para imprimir los alumnos en la cola (para verificar el orden)
 void mostrarCola(const ColaInscripciones &cola) {
     if(cola.empty()) {
         cout << "No hay alumnos en la cola para inscribirse." << endl;
@@ -80,7 +80,7 @@ void mostrarCola(const ColaInscripciones &cola) {
 }
 
 
-// Función para mostrar los alumnos ya inscritos
+// Funci�n para mostrar los alumnos ya inscritos
 void mostrarListaInscritos(alumno &listaAltas) {
     alumno aux = listaAltas;
     while (aux != nullptr) {
