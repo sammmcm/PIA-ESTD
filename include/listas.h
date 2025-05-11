@@ -1,7 +1,9 @@
 #ifndef LISTAS_H_INCLUDED
 #define LISTAS_H_INCLUDED
 
-bool listaVacia(alumno &lista);
+#include "alta.h"
+
+bool listaVacia(alumno lista);
 void insertarEnLista(alumno &lista, alumno &nuevo);
 void eliminarAlumDeLista(alumno &lista, alumno &elem);
 void eliminarLista(alumno &lista);
