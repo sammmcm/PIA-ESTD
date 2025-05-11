@@ -25,7 +25,10 @@ alumno busquedaPorNombre(alumno &estructura, string &elimNom) {
 }
 
 void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
-    if (listaVacia(listaAltas)) return;
+    if (listaVacia(listaAltas)) {
+        cout << "No hay alumnos para dar de baja." << endl << endl;
+        return;
+    }
 
     int opBusc;
     
@@ -129,7 +132,10 @@ void deshacerBajaParcial(alumno &pila, alumno &listaAltas, alumno &listaBajas) {
 }
 
 void bajaTotal(alumno &listaBajas, alumno &pila) {
-    if (listaVacia(listaBajas)) return;
+    if (listaVacia(listaBajas)) {
+        cout << "No hay alumnos para dar de baja." << endl << endl;
+        return;
+    }
 
     int opBusc;
     long bajaMat;
