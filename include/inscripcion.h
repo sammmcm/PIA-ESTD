@@ -1,5 +1,5 @@
-#ifndef INSCRIPCIONES_H
-#define INSCRIPCIONES_H
+#ifndef INSCRIPCION_H_INCLUDED
+#define INSCRIPCION_H_INCLUDED
 
 #include <string>
 #include <queue>  // Necesario para usar priority_queue
@@ -21,19 +21,19 @@ struct Alumno {
 // Tipo de cola de prioridad para inscripciones
 using ColaInscripciones = priority_queue<Alumno>;
 
-// Función para agregar los alumnos esperando a la cola de inscripciones
+// Funci�n para agregar los alumnos esperando a la cola de inscripciones
 void agregarAColaDeInscripciones(alumno &listaAltas, ColaInscripciones &cola);
 
-// Función para desencolar un alumno (inscripción)
+// Funci�n para desencolar un alumno (inscripci�n)
 void inscribirAlumno(ColaInscripciones &cola, alumno &listaAltas);
 
 
-// Función para imprimir los alumnos en la cola (para verificar el orden)
+// Funci�n para imprimir los alumnos en la cola (para verificar el orden)
 void mostrarCola(const ColaInscripciones &cola);
 
-// Función para mostrar los alumnos ya inscritos (en listaAltas con situación inscrito)
+// Funci�n para mostrar los alumnos ya inscritos (en listaAltas con situaci�n inscrito)
 void mostrarListaInscritos(alumno &listaAltas);
 
 string estado(insc estado);
 
-#endif // INSCRIPCIONES_H
+#endif // INSCRIPCION_H_INCLUDED
