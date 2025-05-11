@@ -1,15 +1,15 @@
 #include <iostream>
 #include <iomanip>
+#include "listas.h"
 #include "reportes.h"
 
 using namespace std;
 
 const double PROMEDIO_MIN_APROBADO = 70.0;
 
-void imprimirAlumnosAprobados(const alumno &listaAltas)
-{
-    if (listaAltas == nullptr) {
-        cout << endl << "no hay alumnos activos." << endl << endl;
+void imprimirAlumnosAprobados(const alumno &listaAltas) {
+    if (listaVacia(listaAltas)) {
+        cout << "No hay alumnos activos." << endl << endl;
         return;
     }
 
@@ -19,13 +19,13 @@ void imprimirAlumnosAprobados(const alumno &listaAltas)
         if (a->promedio >= PROMEDIO_MIN_APROBADO) conta++;
 
     if (conta == 0) {
-        cout << endl << "no hay alumnos aprobados." << endl << endl;
+        cout << endl << "No hay alumnos aprobados." << endl << endl;
         return;
     }
 
     /* ahora si imprimimos la tabla */
-    cout << endl << left << setw(12) << "matricula"
-         << setw(30) << "nombre" << "promedio" << endl
+    cout << endl << left << setw(12) << "Matricula"
+         << setw(30) << "Nombre" << "Promedio" << endl
          << string(55, '-') << endl;
 
     for (alumno a = listaAltas; a; a = a->sig)
@@ -37,10 +37,9 @@ void imprimirAlumnosAprobados(const alumno &listaAltas)
     cout << endl;
 }
 
-void imprimirPorcentajes(const alumno &listaAltas)
-{
-    if (listaAltas == nullptr) {
-        cout << endl << "no hay alumnos activos." << endl << endl;
+void imprimirPorcentajes(const alumno &listaAltas) {
+    if (listaVacia(listaAltas)) {
+        cout << "No hay alumnos activos." << endl << endl;
         return;
     }
 
@@ -51,7 +50,7 @@ void imprimirPorcentajes(const alumno &listaAltas)
     }
 
     if (total == 0) {                       // proteccion extra
-        cout << endl << "no hay alumnos registrados." << endl << endl;
+        cout << endl << "No hay alumnos registrados." << endl << endl;
         return;
     }
 
@@ -64,17 +63,16 @@ void imprimirPorcentajes(const alumno &listaAltas)
          << "% reprobados: " << pReprob << "%" << endl << endl;
 }
 
-void imprimirDatosGenerales(const alumno &listaAltas)
-{
-    if (listaAltas == nullptr) {
-        cout << endl << "no hay alumnos activos." << endl << endl;
+void imprimirDatosGenerales(const alumno &listaAltas) {
+    if (listaVacia(listaAltas)) {
+        cout << "No hay alumnos activos." << endl << endl;
         return;
     }
 
-    cout << endl << left << setw(30) << "nombre"
-         << setw(6)  << "edad"
-         << "direccion" << endl
-         << string(80, '-') << endl;
+    cout << endl << left << setw(30) << "Nombre"
+         << setw(6)  << "Edad"
+         << "Direccion" << endl
+         << string(90, '-') << endl;
 
     for (alumno a = listaAltas; a; a = a->sig)
         cout << left << setw(30) << a->nombre
@@ -82,19 +80,18 @@ void imprimirDatosGenerales(const alumno &listaAltas)
              << a->address.calle << ", "
              << a->address.colonia << ", "
              << a->address.municipio << " #"
-             << a->address.numero << ", cp "
+             << a->address.numero << ", CP "
              << a->address.cp << endl;
     cout << endl;
 }
 
-void imprimirAlumnosInactivos(const alumno &listaBajas)
-{
+void imprimirAlumnosInactivos(const alumno &listaBajas) {
     if (listaBajas == nullptr) {
-        cout << endl << "no hay alumnos inactivos." << endl << endl;
+        cout << "No hay alumnos inactivos." << endl << endl;
         return;
     }
 
-    cout << endl << left << setw(12) << "matricula" << "nombre" << endl << string(42, '-') << endl;
+    cout << endl << left << setw(12) << "Matricula" << "Nombre" << endl << string(42, '-') << endl;
 
     for (alumno a = listaBajas; a; a = a->sig)
         cout << left << setw(12) << a->matricula << a->nombre << endl;
