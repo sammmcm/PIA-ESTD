@@ -12,7 +12,10 @@ using namespace std;
  * se desvincula el nodo sin eliminarlo para reutilizarlo
 */
 void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas) {
-    if (listaVacia(listaBajas)) return;
+    if (listaVacia(listaBajas)) {
+        cout << "No hay alumnos para recuperar." << endl << endl;
+        return;
+    }
 
     int opcBusq;
     cout << endl << "Buscar por:" << endl
