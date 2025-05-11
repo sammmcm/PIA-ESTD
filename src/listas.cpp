@@ -3,9 +3,9 @@
 
 using namespace std;
 
-bool listaVacia(alumno &lista) {
+bool listaVacia(alumno lista) {
     if (lista == nullptr) {
-        cout << endl << "La lista esta vacia. No hay alumnos para dar de baja." << endl << endl;
+        cout << endl << "La lista esta vacia. ";
         return true;
     }
 
