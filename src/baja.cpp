@@ -31,12 +31,10 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
     }
 
     int opBusc;
-    
     cout << endl << "Buscar por:" << endl
-         << "1. Matricula." << endl
-         << "2. Nombre." << endl
-         << "3. Salir." << endl;
-
+        << "1. Matricula." << endl
+        << "2. Nombre." << endl
+        << "3. Salir." << endl;
     do {
         cout << "Elija una opcion: ";
     } while (!validarInt(opBusc) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
@@ -66,9 +64,11 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
             alumBaja->address.numero = encontrado->address.numero;
             alumBaja->address.cp = encontrado->address.cp;
             alumBaja->inscripcion = inactivo;
+
             insertarEnLista(listaBajas, alumBaja);
             insertarEnPila(pila, alumBaja);
             eliminarAlumDeLista(listaAltas, encontrado);
+
             cout << endl << "Alumno eliminado." << endl << endl;
             break;
         }
@@ -96,17 +96,19 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
             alumBaja->address.numero = encontrado->address.numero;
             alumBaja->address.cp = encontrado->address.cp;
             alumBaja->inscripcion = inactivo;
+
             insertarEnLista(listaBajas, alumBaja);
             insertarEnPila(pila, alumBaja);
             eliminarAlumDeLista(listaAltas, encontrado);
+            
             cout << endl << "Alumno eliminado." << endl << endl;
             break;
         }
         case 3: 
-            cout << "Saliendo del submenu..." << endl;
+            cout << endl << "Saliendo del submenu..." << endl << endl;
             break;
         default: 
-            cout << "Error: Opcion incorrecta." << endl;
+            cout << "Error: Opcion incorrecta." << endl << endl;
             break;
     }
 }
@@ -118,7 +120,7 @@ void deshacerBajaParcial(alumno &pila, alumno &listaAltas, alumno &listaBajas) {
     int tam = obtenerTamaño(listaBajas);
     alumno encontrado = busquedaBinaria(listaBajas, 0, tam - 1, matricula);
     if (encontrado == nullptr) {
-        cout << endl << "No se encontro el alumno con la matricula " << matricula << "." << endl << endl;
+        cout << endl << "Algo salió mal..." << endl << endl;
         return;
     }
 
@@ -127,7 +129,9 @@ void deshacerBajaParcial(alumno &pila, alumno &listaAltas, alumno &listaBajas) {
     pila = pila->sig;
     aux->situacion = alta;
     aux->inscripcion = esperando;
+
     insertarEnLista(listaAltas, aux);
+    
     cout << endl << "Se recupero el alumno con la matricula " << matricula << "." << endl << endl;
 }
 
@@ -138,38 +142,38 @@ void bajaTotal(alumno &listaBajas, alumno &pila) {
     }
 
     int opBusc;
-    long bajaMat;
-    string elimNom;
-    alumno listaAlum;
-    alumno pilaAlum;
-
     cout << endl << "Buscar por:" << endl
-         << "1. Matricula." << endl
-         << "2. Nombre." << endl
-         << "3. Salir." << endl;
-
+        << "1. Matricula." << endl
+        << "2. Nombre." << endl
+        << "3. Salir." << endl;
     do {
         cout << "Elija una opcion: ";
     } while (!validarInt(opBusc) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
+    alumno listaAlum;
+    alumno pilaAlum;
     switch (opBusc) {
-        case 1:
+        case 1: {
+            long bajaMat;
             do {
                 cout << endl << "Ingrese la matricula del alumno a dar de baja: ";
             } while (!validarLong(bajaMat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl);
-
+            
             listaAlum = busquedaPorMatricula(listaBajas, bajaMat);
             if (listaAlum == nullptr) {
                 cout << endl << "No se encontro el alumno con la matricula " << bajaMat << "." << endl << endl;
                 return;
             }
-
+            
             eliminarAlumDeLista(listaBajas, listaAlum);
             pilaAlum = busquedaPorMatricula(pila, bajaMat);
             eliminarAlumDePila(pila, pilaAlum);
+
             cout << endl << "Alumno eliminado." << endl << endl;
             break;
-        case 2:
+        }
+        case 2: {
+            string elimNom;
             do {
                 cout << endl << "Ingrese el nombre del alumno a dar de baja: "; getline(cin, elimNom);
             } while (!validarString(elimNom) && cout << "Error: El nombre debe estar conformado solo por letras." << endl);
@@ -183,13 +187,15 @@ void bajaTotal(alumno &listaBajas, alumno &pila) {
             eliminarAlumDeLista(listaBajas, listaAlum);
             pilaAlum = busquedaPorNombre(pila, elimNom);
             eliminarAlumDePila(pila, pilaAlum);
+            
             cout << endl << "Alumno eliminado." << endl << endl;
             break;
+        }
         case 3: 
-            cout << "Saliendo del submenu..." << endl;
+            cout << endl << "Saliendo del submenu..." << endl << endl;
             break;
         default: 
-            cout << "Error: Opcion incorrecta." << endl;
+            cout << "Error: Opcion incorrecta." << endl << endl;
             break;
     }
 }
