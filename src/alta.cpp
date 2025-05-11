@@ -5,7 +5,7 @@
 
 using namespace std;
 
-alumno altaAlum(alumno &lista) {
+alumno altaAlum() {
     alumno nuevo = new nodo;
     string entrada;
     do {
