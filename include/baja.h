@@ -1,6 +1,8 @@
 #ifndef BAJA_H_INCLUDED
 #define BAJA_H_INCLUDED
 
+#include "alta.h"
+
 alumno busquedaPorMatricula(alumno &estructura, long &bajaMat);
 alumno busquedaPorNombre(alumno &estructura, string &elimNom);
 void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila);
