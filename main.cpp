@@ -1,6 +1,7 @@
 #include <iostream>
 #include "alta.h"
 #include "baja.h"
+#include "grupos.h"
 #include "listas.h"
 #include "inscripcion.h"
 #include "modificacion.h"
@@ -35,7 +36,7 @@ int main() {
 
         switch (op) {
             case 1: {
-                alumno nuevo = altaAlum(listaAltas);
+                alumno nuevo = altaAlum();
                 insertarEnLista(listaAltas, nuevo);
                 mergeSort(listaAltas);
                 break;
@@ -48,7 +49,6 @@ int main() {
                          << "2. Deshacer baja parcial." << endl
                          << "3. Baja total." << endl
                          << "4. Salir." << endl;
-
                     do {
                         cout << "Elija una opcion: ";
                     } while (!validarInt(opsubmenu) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
@@ -203,6 +203,7 @@ int main() {
                 break;
             }
             case 7:
+                crearGrupos(listaAltas);
                 break;
             case 8:
                 eliminarLista(listaAltas);
