@@ -44,7 +44,7 @@ void bajaParcial(alumno &listaAltas, alumno &listaBajas, alumno &pila) {
             long bajaMat;
             do {
                 cout << endl << "Ingrese la matricula del alumno a dar de baja: ";
-            } while (!validarLong(bajaMat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl);
+            } while (!validarLong(bajaMat) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
         
             alumno encontrado = busquedaPorMatricula(listaAltas, bajaMat);
             if (encontrado == nullptr) {
@@ -120,7 +120,7 @@ void deshacerBajaParcial(alumno &pila, alumno &listaAltas, alumno &listaBajas) {
     int tam = obtenerTamaño(listaBajas);
     alumno encontrado = busquedaBinaria(listaBajas, 0, tam - 1, matricula);
     if (encontrado == nullptr) {
-        cout << endl << "Algo salió mal..." << endl << endl;
+        cout << endl << "No se encontro el alumno con la matricula " << matricula << "." << endl << endl;
         return;
     }
 
@@ -157,7 +157,7 @@ void bajaTotal(alumno &listaBajas, alumno &pila) {
             long bajaMat;
             do {
                 cout << endl << "Ingrese la matricula del alumno a dar de baja: ";
-            } while (!validarLong(bajaMat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl);
+            } while (!validarLong(bajaMat) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
             
             listaAlum = busquedaPorMatricula(listaBajas, bajaMat);
             if (listaAlum == nullptr) {
