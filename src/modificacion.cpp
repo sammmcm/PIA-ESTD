@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "alta.h"
+#include "baja.h"
 #include "inscripcion.h"
 #include "modificacion.h"
 #include "validaciones.h"
@@ -17,7 +18,7 @@ ostream& operator<<(ostream& os, const insc& estado) {
     return os;
 }
 
-void modificarAlumno(alumno encontrado) {
+void modificarAlumno(alumno encontrado, alumno listaAltas) {
     cout << "\nAlumno encontrado" << endl;
     cout << "Nombre: " << encontrado->nombre << endl;
     cout << "Edad: " << encontrado->edad << endl;
@@ -52,7 +53,7 @@ void modificarAlumno(alumno encontrado) {
             case 1:
                 do {
                     cout << endl << "Ingrese la nueva matricula: ";
-                } while (!validarLong(encontrado->matricula) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
+                } while ((!validarLong(encontrado->matricula) || busquedaPorMatricula(listaAltas, encontrado->matricula)) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos y no debe repetirse." << endl);
                 cout << endl;
                 system("pause"); system("cls");
                 break;
