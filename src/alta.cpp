@@ -1,16 +1,18 @@
 #include <iostream>
 #include "alta.h"
+#include "baja.h"
 #include "listas.h"
 #include "validaciones.h"
 
 using namespace std;
 
-alumno altaAlum() {
+alumno altaAlum(alumno listaAltas) {
     alumno nuevo = new nodo;
+    long matriculaRep;
     string entrada;
     do {
         cout << endl << "Ingrese la matricula: ";
-    } while (!validarLong(nuevo->matricula) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
+    } while ((!validarLong(nuevo->matricula) || busquedaPorMatricula(listaAltas, nuevo->matricula)) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos y no debe repetirse." << endl);
     do {
         cout << endl << "Ingrese el nombre: "; getline(cin, nuevo->nombre);
     } while (!validarString(nuevo->nombre) && cout << "Error: El nombre debe estar conformado solo por letras." << endl);
