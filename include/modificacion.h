@@ -3,6 +3,6 @@
 
 #include "alta.h"
 
-void modificarAlumno(alumno encontrado);
+void modificarAlumno(alumno encontrado, alumno listaAltas);
 
 #endif
