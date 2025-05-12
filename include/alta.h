@@ -33,6 +33,6 @@ typedef struct nodo {
     nodo *sig;
 } *alumno;
 
-alumno altaAlum();
+alumno altaAlum(alumno listaAltas);
 
 #endif // ALTA_H_INCLUDED
