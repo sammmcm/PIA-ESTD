@@ -36,7 +36,7 @@ int main() {
 
         switch (op) {
             case 1: {
-                alumno nuevo = altaAlum();
+                alumno nuevo = altaAlum(listaAltas);
                 insertarEnLista(listaAltas, nuevo);
                 mergeSort(listaAltas);
                 break;
@@ -96,11 +96,11 @@ int main() {
                     } while (!validarInt(opsubmenu) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
                     switch (opsubmenu) {
-                        case 1: 
+                        case 1:
                             imprimirAlumnosAprobados(listaAltas);
                             system("pause"); system("cls");
                             break;
-                        case 2: 
+                        case 2:
                             imprimirPorcentajes(listaAltas);
                             system("pause"); system("cls");
                             break;
@@ -112,10 +112,10 @@ int main() {
                             imprimirAlumnosInactivos(listaBajas);
                             system("pause"); system("cls");
                             break;
-                        case 5: 
+                        case 5:
                             cout << endl << "Saliendo del submenu..." << endl << endl;
                             break;
-                        default: 
+                        default:
                             cout << "Error: Opcion incorrecta." << endl << endl;
                             system("pause"); system("cls");
                             break;
@@ -146,7 +146,7 @@ int main() {
                             long mat;
                             do {
                                 cout << "Ingrese la matricula: ";
-                            } while (!validarLong(mat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl << endl);
+                            } while (!validarLong(mat) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl << endl);
                             encontrado = busquedaPorMatricula(listaAltas, mat);
                             break;
                         }
@@ -170,7 +170,7 @@ int main() {
                         if (!encontrado) {
                             cout << endl << "Alumno no encontrado." << endl << endl;
                         } else {
-                            modificarAlumno(encontrado);
+                            modificarAlumno(encontrado, listaAltas);
                         }
                         system("pause"); system("cls");
                     }
