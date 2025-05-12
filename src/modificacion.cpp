@@ -101,14 +101,14 @@ void modificarAlumno(alumno encontrado) {
             case 8:
                 do {
                     cout << endl << "Ingrese el nuevo numero de domicilio: ";
-                } while ((!validarInt(encontrado->address.numero) || encontrado->address.numero < 100 && encontrado->address.numero > 999) && cout << "Error: El numero debe ser un numero positivo de 3 digitos." << endl);
+                } while ((!validarInt(encontrado->address.numero) || encontrado->address.numero < 100 || encontrado->address.numero > 999) && cout << "Error: El numero debe ser un numero positivo de 3 digitos." << endl);
                 cout << endl;
                 system("pause"); system("cls");
                 break;
             case 9:
                 do {
                     cout << endl << "Ingrese el nuevo codigo postal: ";
-                } while ((!validarInt(encontrado->address.cp) || encontrado->address.cp < 10000 && encontrado->address.cp > 99999)  && cout << "Error: El CP debe ser un numero positivo de 5 digitos." << endl);
+                } while ((!validarInt(encontrado->address.cp) || encontrado->address.cp < 10000 || encontrado->address.cp > 99999)  && cout << "Error: El CP debe ser un numero positivo de 5 digitos." << endl);
                 cout << endl;
                 system("pause"); system("cls");
                 break;
