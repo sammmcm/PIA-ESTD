@@ -9,98 +9,116 @@ using namespace std;
 
 ostream& operator<<(ostream& os, const insc& estado) {
     switch(estado) {
-        case esperando: os << "esperando"; break;
-        case inactivo: os << "inactivo"; break;
-        case inscrito: os << "inscrito"; break;
-        default: os << "desconocido"; break;
+        case esperando: os << "Esperando"; break;
+        case inactivo: os << "Inactivo"; break;
+        case inscrito: os << "Inscrito"; break;
+        default: os << "Desconocido"; break;
     }
     return os;
 }
 
 void modificarAlumno(alumno encontrado) {
-    cout << "\nAlumno encontrado:" << endl;
+    cout << "\nAlumno encontrado" << endl;
     cout << "Nombre: " << encontrado->nombre << endl;
     cout << "Edad: " << encontrado->edad << endl;
     cout << "Promedio: " << encontrado->promedio << endl;
-    cout << "Direccion: " << encontrado->address.calle << ", "
+    cout << "Direccion: " << encontrado->address.calle << " #"
+         << encontrado->address.numero << ", Col. "
          << encontrado->address.colonia << ", "
-         << encontrado->address.municipio << ", #"
-         << encontrado->address.numero << ", CP "
+         << encontrado->address.municipio << ", CP "
          << encontrado->address.cp << endl;
     cout << "Estatus de inscripcion: " << encontrado->inscripcion << endl;
 
     int opcionMod;
+    cout << endl;
     do {
-        cout << "\nQue desea modificar?" << endl;
-        cout << "1. Nombre." << endl;
-        cout << "2. Edad " << endl;
-        cout << "3. Promedio." << endl;
-        cout << "4. Calle." << endl;
-        cout << "5. Colonia." << endl;
-        cout << "6. Municipio." << endl;
-        cout << "7. Numero de domicilio." << endl;
-        cout << "8. Codigo postal." << endl;
-        cout << "9. Salir." << endl;
+        cout << "Elija la opcion a modificar:" << endl
+             << "1. Matricula." << endl
+             << "2. Nombre." << endl
+             << "3. Edad " << endl
+             << "4. Promedio." << endl
+             << "5. Calle." << endl
+             << "6. Colonia." << endl
+             << "7. Municipio." << endl
+             << "8. Numero de domicilio." << endl
+             << "9. Codigo postal." << endl
+             << "10. Salir." << endl;
 
         do {
             cout << "Elija una opcion: ";
-        } while (!validarInt(opcionMod) && cout << "Error: La opcion debe ser entero y contener solo numeros.\n");
+        } while (!validarInt(opcionMod) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
         switch (opcionMod) {
-            case 1: {
+            case 1:
+                do {
+                    cout << endl << "Ingrese la nueva matricula: ";
+                } while (!validarLong(encontrado->matricula) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
+                cout << endl;
+                system("pause"); system("cls");
+                break;
+            case 2:
                 do {
                     cout << endl << "Ingrese el nuevo nombre: "; getline(cin, encontrado->nombre);
                 } while (!validarString(encontrado->nombre) && cout << "Error: El nombre debe estar conformado solo por letras." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 2: {
+            case 3:
                 do {
-                    cout << "Ingrese la nueva edad: ";
-                } while (!validarInt(encontrado->edad) && cout << "Error: La edad debe ser positiva y contener solo numeros.\n");
+                    cout << endl << "Ingrese la nueva edad: ";
+                } while ((!validarInt(encontrado->edad) || encontrado->edad < 5 || encontrado->edad > 100) && cout << "Error: La edad debe ser un numero positivo entre 5 y 100 años." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 3: {
+            case 4:
                 do {
-                    cout << "Ingrese el nuevo promedio: ";
-                } while (!validarDouble(encontrado->promedio) && cout << "Error: El promedio debe ser positiva y contener solo numeros.\n");
+                    cout << endl << "Ingrese el nuevo promedio: ";
+                } while ((!validarDouble(encontrado->promedio) || encontrado->promedio > 100) && cout << "Error: El promedio debe ser un numero positivo entre 0 y 100." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 4: {
+            case 5: 
                 do {
-                    cout << "Ingrese la nueva calle: "; getline(cin, encontrado->address.calle);
-                } while (!validarString(encontrado->address.calle) && cout << "Error: La calle debe estar conformado solo por letras." << endl << endl);
+                    cout << endl << "Ingrese la nueva calle: "; getline(cin, encontrado->address.calle);
+                } while (!validarString(encontrado->address.calle) && cout << "Error: La calle debe estar conformado solo por letras." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 5: {
+            case 6:
                 do {
-                    cout << "Ingrese la nueva colonia: "; getline(cin, encontrado->address.colonia);
-                } while (!validarString(encontrado->address.colonia) && cout << "Error: La colonia debe estar conformado solo por letras." << endl << endl);
+                    cout << endl << "Ingrese la nueva colonia: "; getline(cin, encontrado->address.colonia);
+                } while (!validarString(encontrado->address.colonia) && cout << "Error: La colonia debe estar conformado solo por letras." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 6: {
+            case 7:
                 do {
-                    cout << "Ingrese el nuevo municipio: "; getline(cin, encontrado->address.municipio);
-                } while (!validarString(encontrado->address.municipio) && cout << "Error: El municipio debe estar conformado solo por letras." << endl << endl);
+                    cout << endl << "Ingrese el nuevo municipio: "; getline(cin, encontrado->address.municipio);
+                } while (!validarString(encontrado->address.municipio) && cout << "Error: El municipio debe estar conformado solo por letras." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 7: {
+            case 8:
                 do {
-                    cout << "Ingrese el nuevo numero de domicilio: ";
-                } while (!validarInt(encontrado->address.numero) && cout << "Error: El numero debe ser positivo y contener solo numeros.\n");
+                    cout << endl << "Ingrese el nuevo numero de domicilio: ";
+                } while ((!validarInt(encontrado->address.numero) || encontrado->address.numero < 100 && encontrado->address.numero > 999) && cout << "Error: El numero debe ser un numero positivo de 3 digitos." << endl);
+                cout << endl;
+                system("pause"); system("cls");
                 break;
-            }
-            case 8: {
-                do {
-                    cout << "Ingrese el nuevo codigo postal: ";
-                } while (!validarInt(encontrado->address.cp) && cout << "Error: El CP debe ser positivo y contener solo numeros.\n");
-                break;
-            }
             case 9:
-                cout << "Saliendo del submenu..." << endl;
+                do {
+                    cout << endl << "Ingrese el nuevo codigo postal: ";
+                } while ((!validarInt(encontrado->address.cp) || encontrado->address.cp < 10000 && encontrado->address.cp > 99999)  && cout << "Error: El CP debe ser un numero positivo de 5 digitos." << endl);
+                cout << endl;
+                system("pause"); system("cls");
+                break;
+            case 10:
+                cout << endl << "Saliendo del submenu..." << endl << endl;
                 break;
             default:
-                cout << "Error: Opcion incorrecta." << endl;
+                cout << "Error: Opcion incorrecta." << endl << endl;
+                system("pause"); system("cls");
                 break;
         }
-    } while (opcionMod != 9);
+    } while (opcionMod != 10);
 }
