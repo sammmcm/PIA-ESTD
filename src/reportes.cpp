@@ -1,100 +1,81 @@
 #include <iostream>
-#include <iomanip>
+#include "baja.h"
 #include "listas.h"
-#include "reportes.h"
+#include "pilas.h"
+#include "recuperar.h"
+#include "validaciones.h"
 
 using namespace std;
 
-const double PROMEDIO_MIN_APROBADO = 70.0;
-
-void imprimirAlumnosAprobados(const alumno &listaAltas) {
-    if (listaVacia(listaAltas)) {
-        cout << "No hay alumnos activos." << endl << endl;
+void recuperarAlumno(alumno &listaAltas, alumno &listaBajas, alumno &pilaBajas) {
+    if (listaVacia(listaBajas)) {
+        cout << "No hay alumnos para recuperar." << endl << endl;
         return;
     }
 
-    /* contamos primero para saber si existe al menos un aprobado */
-    int conta = 0;
-    for (alumno a = listaAltas; a; a = a->sig)
-        if (a->promedio >= PROMEDIO_MIN_APROBADO) conta++;
+    int opcBusq;
+    cout << endl << "Buscar por:" << endl
+         << "1. Matricula." << endl
+         << "2. Nombre." << endl
+         << "3. Salir." << endl;
+    do {
+        cout << "Elija una opcion: ";
+    } while (!validarInt(opcBusq) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
-    if (conta == 0) {
-        cout << endl << "No hay alumnos aprobados." << endl << endl;
+    alumno hallado = nullptr;
+
+    switch (opcBusq) {
+        case 1: {
+            long mat;
+            do {
+                cout << endl << "Ingrese la matricula del alumno a recuperar: ";
+            } while (!validarLong(mat) && cout << "Error: La matricula debe ser un numero positivo de 7 digitos." << endl);
+
+            int tam = obtenerTamaño(listaBajas);
+            hallado = busquedaBinaria(listaBajas, 0, tam - 1, mat);
+            break;
+        }
+        case 2: {
+            string nom;
+            do {
+                cout << endl << "Ingrese el nombre del alumno a recuperar: "; getline(cin, nom);
+            } while (!validarString(nom) && cout << "Error: El nombre debe estar conformado solo por letras." << endl);
+
+            hallado = busquedaPorNombre(listaBajas, nom);
+            break;
+        }
+        case 3: 
+            cout << endl << "Saliendo del submenu..." << endl << endl;
+            break;
+        default:
+            cout << "Error: Opcion incorrecta." << endl << endl;
+            break;;
+    }
+
+    if (!hallado) {
+        cout << endl << "Alumno no encontrado." << endl << endl;
         return;
     }
 
-    /* ahora si imprimimos la tabla */
-    cout << endl << left << setw(12) << "Matricula"
-         << setw(30) << "Nombre" << "Promedio" << endl
-         << string(55, '-') << endl;
-
-    for (alumno a = listaAltas; a; a = a->sig)
-        if (a->promedio >= PROMEDIO_MIN_APROBADO)
-            cout << left << setw(12) << a->matricula
-                 << setw(30) << a->nombre
-                 << fixed << setprecision(2) << a->promedio << endl;
-
-    cout << endl;
-}
-
-void imprimirPorcentajes(const alumno &listaAltas) {
-    if (listaVacia(listaAltas)) {
-        cout << "No hay alumnos activos." << endl << endl;
-        return;
+    if (listaBajas == hallado) {
+        listaBajas = listaBajas->sig;
+    } else {
+        alumno ant = listaBajas;
+        while (ant->sig && ant->sig != hallado) ant = ant->sig;
+        if (ant->sig == hallado) ant->sig = hallado->sig;
     }
+    hallado->sig = nullptr;
 
-    int total = 0, aprobados = 0;
-    for (alumno a = listaAltas; a; a = a->sig) {
-        total++;
-        if (a->promedio >= PROMEDIO_MIN_APROBADO) aprobados++;
-    }
+    alumno copiaPila = (opcBusq == 1)
+                       ? busquedaPorMatricula(pilaBajas, hallado->matricula)
+                       : busquedaPorNombre(pilaBajas, hallado->nombre);
 
-    if (total == 0) {                       // proteccion extra
-        cout << endl << "No hay alumnos registrados." << endl << endl;
-        return;
-    }
+    if (copiaPila) eliminarAlumDePila(pilaBajas, copiaPila);
 
-    double pAprob = (aprobados * 100.0) / total;
-    double pReprob = 100.0 - pAprob;
+    hallado->situacion = alta;
+    hallado->inscripcion = esperando;
+    insertarEnLista(listaAltas, hallado);
+    mergeSort(listaAltas);
 
-    cout << fixed << setprecision(2);
-    cout << endl
-         << "% aprobados : " << pAprob  << "%" << endl
-         << "% reprobados: " << pReprob << "%" << endl << endl;
-}
-
-void imprimirDatosGenerales(const alumno &listaAltas) {
-    if (listaVacia(listaAltas)) {
-        cout << "No hay alumnos activos." << endl << endl;
-        return;
-    }
-
-    cout << endl << left << setw(30) << "Nombre"
-         << setw(6)  << "Edad"
-         << "Direccion" << endl
-         << string(90, '-') << endl;
-
-    for (alumno a = listaAltas; a; a = a->sig)
-        cout << left << setw(30) << a->nombre
-             << setw(6)  << a->edad
-             << a->address.calle << ", "
-             << a->address.colonia << ", "
-             << a->address.municipio << " #"
-             << a->address.numero << ", CP "
-             << a->address.cp << endl;
-    cout << endl;
-}
-
-void imprimirAlumnosInactivos(const alumno &listaBajas) {
-    if (listaBajas == nullptr) {
-        cout << "No hay alumnos inactivos." << endl << endl;
-        return;
-    }
-
-    cout << endl << left << setw(12) << "Matricula" << "Nombre" << endl << string(42, '-') << endl;
-
-    for (alumno a = listaBajas; a; a = a->sig)
-        cout << left << setw(12) << a->matricula << a->nombre << endl;
-
-    cout << endl;
+    cout << endl << "Alumno recuperado con exito." << endl << endl;
 }
