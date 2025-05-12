@@ -3,10 +3,10 @@
 
 using namespace std;
 
-bool validarEspaciosOVacio(const string&);
-bool validarString(const string&);
-bool validarInt(int&);
-bool validarLong(long&);
-bool validarDouble(double&);
+bool validarEspaciosOVacio(const string &str);
+bool validarString(const string &str);
+bool validarInt(int &num);
+bool validarLong(long &num);
+bool validarDouble(double &num);
 
 #endif //VALIDACIONES_H
