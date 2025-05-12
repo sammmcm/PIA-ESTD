@@ -81,11 +81,11 @@ int main() {
                 break;
             case 3:
                 recuperarAlumno(listaAltas, listaBajas, pilaBajas);
-                system("pause"); system("cls");
                 break;
             case 4:
+                cout << endl;
                 do {
-                    cout << "\n\tSUBMENU" << endl
+                    cout << "\tSUBMENU" << endl
                          << "1. Alumnos aprobados." << endl
                          << "2. Porcentajes." << endl
                          << "3. Datos generales." << endl
@@ -96,35 +96,57 @@ int main() {
                     } while (!validarInt(opsubmenu) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
                     switch (opsubmenu) {
-                        case 1: imprimirAlumnosAprobados(listaAltas); break;
-                        case 2: imprimirPorcentajes(listaAltas); break;
-                        case 3: imprimirDatosGenerales(listaAltas); break;
-                        case 4: imprimirAlumnosInactivos(listaBajas); break;
-                        case 5: cout << "Saliendo del submenu..." << endl; break;
-                        default: cout << "Error: Opcion incorrecta." << endl; break;
+                        case 1: 
+                            imprimirAlumnosAprobados(listaAltas);
+                            system("pause"); system("cls");
+                            break;
+                        case 2: 
+                            imprimirPorcentajes(listaAltas);
+                            system("pause"); system("cls");
+                            break;
+                        case 3:
+                            imprimirDatosGenerales(listaAltas);
+                            system("pause"); system("cls");
+                            break;
+                        case 4:
+                            imprimirAlumnosInactivos(listaBajas);
+                            system("pause"); system("cls");
+                            break;
+                        case 5: 
+                            cout << endl << "Saliendo del submenu..." << endl << endl;
+                            break;
+                        default: 
+                            cout << "Error: Opcion incorrecta." << endl << endl;
+                            system("pause"); system("cls");
+                            break;
                     }
-                    system("pause"); system("cls");
                 } while (opsubmenu != 5);
                 break;
             case 5: {
-                int opcionBusqueda = 0;
+                if (listaVacia(listaAltas)) {
+                    cout << "No hay alumnos para modificar sus datos." << endl << endl;
+                    break;
+                }
+
+                int opcionBusqueda;
                 alumno encontrado = nullptr;
+                cout << endl;
                 do {
-                    cout << "\n\tBuscar por:\n"
+                    cout << "\tBuscar por:\n"
                             << "1. Matricula.\n"
                             << "2. Nombre.\n"
                             << "3. Salir.\n";
-
                     do {
                         cout << "Elija una opcion: ";
-                    } while (!validarInt(opcionBusqueda) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl);
+                    } while (!validarInt(opcionBusqueda) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl << endl);
 
+                    cout << endl;
                     switch (opcionBusqueda) {
                         case 1: {
-                            long mat = 0;
+                            long mat;
                             do {
                                 cout << "Ingrese la matricula: ";
-                            } while (!validarLong(mat) && cout << "Error: La matricula debe ser positiva y contener solo numeros.\n");
+                            } while (!validarLong(mat) && cout << "Error: La matricula debe ser positiva y contener solo numeros." << endl << endl);
                             encontrado = busquedaPorMatricula(listaAltas, mat);
                             break;
                         }
@@ -132,44 +154,44 @@ int main() {
                             string nombre;
                             do {
                                 cout << "Ingrese el nombre: "; getline(cin, nombre);
-                            } while (!validarString(nombre) && cout << "Error: El nombre debe estar conformado solo por letras.\n");
+                            } while (!validarString(nombre) && cout << "Error: El nombre debe estar conformado solo por letras." << endl << endl);
                             encontrado = busquedaPorNombre(listaAltas, nombre);
                             break;
                         }
                         case 3:
-                            cout << "Saliendo del submenu...\n";
+                            cout << "Saliendo del submenu..." << endl << endl;
                             break;
                         default:
-                            cout << "Error: Opcion incorrecta." << endl;
+                            cout << "Error: Opcion incorrecta." << endl << endl;
+                            system("pause"); system("cls");
                             break;
                     }
                     if (opcionBusqueda == 1 || opcionBusqueda == 2) {
                         if (!encontrado) {
-                            cout << "Alumno no encontrado." << endl;
+                            cout << endl << "Alumno no encontrado." << endl << endl;
                         } else {
                             modificarAlumno(encontrado);
                         }
+                        system("pause"); system("cls");
                     }
-                    system("pause"); system("cls");
                 } while (opcionBusqueda != 3);
                 break;
             }
             case 6: {
                 int opcionInscripcion;
+                cout << endl;
                 do {
-                    cout << "\n\tSUBMENU" << endl
-                         << "1. Ver alumnos esperando inscripción." << endl
-                         << "2. Procesar siguiente inscripción." << endl
-                         << "3. Ver alumnos inscritos." << endl
-                         << "4. Volver al menú principal." << endl;
-
+                    cout << "\tSUBMENU" << endl
+                         << "1. Mostrar alumnos en espera." << endl
+                         << "2. Procesar siguiente inscripcion." << endl
+                         << "3. Mostrar alumnos inscritos." << endl
+                         << "4. Salir." << endl;
                     do {
                         cout << "Elija una opcion: ";
                     } while (!validarInt(opcionInscripcion) && cout << "Error: La opcion debe ser entero y contener solo numeros." << endl);
 
                     switch(opcionInscripcion) {
                         case 1: {
-                            // Limpiamos la cola actual y la reconstruimos
                             while(!colaInscripciones.empty()) {
                                 colaInscripciones.pop();
                             }
@@ -177,28 +199,31 @@ int main() {
                             if(!colaInscripciones.empty()) {
                                 mostrarCola(colaInscripciones);
                             } else {
-                                cout << "No hay alumnos esperando inscripción." << endl;
+                                cout << endl << "Cola vacia. No hay alumnos esperando inscripcion." << endl << endl;
                             }
+                            system("pause"); system("cls");
                             break;
                         }
                         case 2:
                             if(!colaInscripciones.empty()) {
-                                inscribirAlumno(colaInscripciones, listaAltas);  // Pass listaAltas
+                                inscribirAlumno(colaInscripciones, listaAltas);
                             } else {
-                                cout << "No hay alumnos en la cola para inscribirse." << endl;
+                                cout << endl << "Cola vacia. No hay alumnos en la cola para inscribirse." << endl << endl;
                             }
+                            system("pause"); system("cls");
                             break;
                         case 3:
                             mostrarListaInscritos(listaAltas);
+                            system("pause"); system("cls");
                             break;
                         case 4:
-                            cout << "Saliendo del submenu..." << endl;
+                            cout << endl << "Saliendo del submenu..." << endl << endl;
                             break;
                         default:
-                            cout << "Error: Opcion incorrecta." << endl;
+                            cout << "Error: Opcion incorrecta." << endl << endl;
+                            system("pause"); system("cls");
+                            break;
                     }
-                    cout << endl;
-                    system("pause"); system("cls");
                 } while (opcionInscripcion != 4);
                 break;
             }
