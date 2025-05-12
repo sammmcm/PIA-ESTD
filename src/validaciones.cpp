@@ -42,7 +42,7 @@ bool validarInt(int &num) {
         }
     }
     num = stoi(entrada);
-    if (num < 0) return false;
+    if (num <= 0) return false;
     return true;
 }
 
@@ -58,7 +58,7 @@ bool validarLong(long &num) {
         }
     }
     num = stol(entrada);
-    if (num < 0) return false;
+    if (num < 1000000 && num > 9999999) return false;
     return true;
 }
 
@@ -83,6 +83,6 @@ bool validarDouble(double &num) {
         }
     }
     num = stod(entrada);
-    if (num < 0) return false;
+    if (num <= 0) return false;
     return true;
 }
